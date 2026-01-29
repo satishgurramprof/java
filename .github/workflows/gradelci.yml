@@ -1,0 +1,44 @@
+
+name: Java CI with Gradle
+
+on:
+  workflow_dispatch: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6.0.2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5.2.0
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      # Setup Gradle + caching
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # Build using Gradle Wrapper
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
+      # Upload build outputs (typically jars are in build/libs)
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            **/build/libs/*.jar
+            **/build/libs/*.war
+          if-no-files-found: error
+
+
+
+
+
+      
