@@ -14,12 +14,11 @@ version = "1.0.0.${buildDate}"
 description = 'io.github.actions_examples.java.helloworld'
 sourceCompatibility = '1.8'
 
+
 repositories {
-    mavenLocal()
-    maven {
-        url = 'http://repo.maven.apache.org/maven2'
-    }
+    mavenCentral()
 }
+
 
 dependencies {
     testImplementation 'junit:junit:4.10'
